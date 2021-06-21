@@ -1,0 +1,52 @@
+<ion-content>
+
+    <h2 class="title-page">Iniciar sesión</h2>
+
+    <form>
+
+        <div class="ion-padding-end">
+            <ion-item>
+                <ion-label position="floating">Correo eléctronico</ion-label>
+                <ion-input></ion-input>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input></ion-input>
+            </ion-item>
+        </div>
+
+
+        <ion-grid class="ion-margin-top" fixed>
+            <ion-row class="ion-justify-content-center">
+                <ion-col size="6">
+                    <ion-button (click)="login()" size="small" expand="block" fill="solid" shape="round">
+                        Ingresar
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+    </form>
+
+    <ion-grid class="ion-margin-top" fixed>
+        <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-text-center" size="6">
+                <ion-label>O ingresa con</ion-label>
+                <ion-button class="ion-margin-top" (click)="loginGoogle()" size="small" expand="block" fill="solid" color="danger" shape="round">
+                    G
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center ion-margin-top">
+            <ion-col class="ion-text-center" size="6">
+                <ion-label>
+                    ¿No tienes cuenta?
+                    <a routerLink="/auth/register">Registrate</a>
+                </ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
