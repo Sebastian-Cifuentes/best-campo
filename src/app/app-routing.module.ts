@@ -17,10 +17,6 @@ const routes: Routes = [
   {
     path: 'no-exist',
     loadChildren: () => import('./shared/no-exist/no-exist.module').then( m => m.NoExistPageModule)
-  },
-  {
-    path: 'choose-role',
-    loadChildren: () => import('./modules/choose-role/choose-role.module').then( m => m.ChooseRolePageModule)
   }
 ];
 

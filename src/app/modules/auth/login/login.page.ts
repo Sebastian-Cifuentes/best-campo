@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,18 +11,25 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   constructor(
+    private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  login() {
-    this.router.navigateByUrl('/protected/choose-role');
+  login(form: NgForm) {
+    // this.router.navigateByUrl('/protected/choose-role');
+    if (form.invalid) {
+      return;
+    }
+    console.log(form);
   }
 
   loginGoogle() {
-    
+
   }
+
+
 
 }

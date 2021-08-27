@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSlide, IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-transportator',

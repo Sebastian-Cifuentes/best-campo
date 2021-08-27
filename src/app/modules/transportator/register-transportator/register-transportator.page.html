@@ -4,4 +4,68 @@
         <ion-title>Registro del transportador</ion-title>
     </ion-toolbar>
 
+    <ion-slides #slide mode="ios" [options]="slidesOptions">
+        <ion-slide>
+            <h3 class="slide-title">Danos info de tu vehículo</h3>
+            <form #formInfo="ngForm">
+                <ion-item>
+                    <ion-label position="stacked">Color del vehículo</ion-label>
+                    <ion-input type="text" name="color" ngModel placeholder="Color"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Tipo del vehículo</ion-label>
+                    <ion-input type="text" name="type" ngModel placeholder="Tipo"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Marca del vehículo</ion-label>
+                    <ion-input type="text" name="brand" ngModel placeholder="Marca"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Modelo del vehículo</ion-label>
+                    <ion-input type="text" name="model" ngModel placeholder="Modelo"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Carga que soporta (kg)</ion-label>
+                    <ion-input type="text" name="load" ngModel placeholder="Kg"></ion-input>
+                </ion-item>
+
+            </form>
+
+
+            <div class="buttons-slide">
+                <ion-button (click)="next('info', formInfo)" expand="block" fill="solid" shape="round">
+                    Siguiente
+                </ion-button>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <h3 class="slide-title">¿De donde eres?</h3>
+
+            <form #formAddress="ngForm">
+                <ion-item>
+                    <ion-label position="stacked">Departamento</ion-label>
+                    <ion-input type="text" name="color" ngModel placeholder="Color"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Ciudad</ion-label>
+                    <ion-input type="text" name="type" ngModel placeholder="Tipo"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Dirección</ion-label>
+                    <ion-input type="text" name="brand" ngModel placeholder="Marca"></ion-input>
+                </ion-item>
+
+            </form>
+
+            <div class="buttons-slide">
+                <ion-button (click)="back()" expand="block" fill="solid" shape="round">
+                    Anterior
+                </ion-button>
+                <ion-button (click)="next('address', formAddress)" expand="block" fill="solid" shape="round">
+                    Terminar registro
+                </ion-button>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
 </ion-content>

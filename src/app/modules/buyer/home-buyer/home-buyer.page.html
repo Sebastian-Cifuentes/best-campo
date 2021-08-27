@@ -4,4 +4,15 @@
         <ion-title>Inicio de comprador</ion-title>
     </ion-toolbar>
 
+    <ion-text color="primary">
+        <h3 class="ion-padding">
+            Crea tus pedidos y te llegarán a tu negocio directamente
+        </h3>
+    </ion-text>
+    <app-card-order></app-card-order>
+
+    <ion-button routerLink="/protected/buyer/create-order" expand="block" fill="clear" shape="round">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Crear pédido
+    </ion-button>
 </ion-content>

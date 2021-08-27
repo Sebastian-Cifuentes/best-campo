@@ -1,0 +1,84 @@
+<ion-content>
+
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button (click)="back()"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>Crear orden</ion-title>
+    </ion-toolbar>
+
+    <ion-slides #slide mode="ios" [options]="slidesOptions">
+        <ion-slide>
+
+            <h3 class="slide-title">Escoge lo que necesitas</h3>
+
+            <form #formNeed="ngForm">
+                <ion-list>
+                    <ion-item lines="none" *ngFor="let food of [ 'Papa', 'Arracacha', 'Yuca', 'Platano', 'Arroz' ]">
+                        <ion-checkbox slot="start" [name]="food" ngModel="false"></ion-checkbox>
+                        <ion-label>{{food}}</ion-label>
+                    </ion-item>
+                </ion-list>
+            </form>
+
+            <ion-button (click)="next()" class="ion-margin-top" expand="block" fill="solid" shape="round">
+                Siguiente
+            </ion-button>
+        </ion-slide>
+
+        <ion-slide>
+            <h3 class="slide-title ion-padding-horizontal">¿Cuanto necesitas de cada producto?</h3>
+
+            <form #formQuantity="ngForm" class="food-time">
+                <ion-item lines="none" *ngFor="let food of [ 'Papa', 'Arracacha', 'Yuca', 'Platano', 'Arroz' ]">
+                    <ion-label position="stacked">{{ food }}</ion-label>
+                    <ion-input [name]="food" ngModel placeholder="Cantidad" required></ion-input>
+                </ion-item>
+            </form>
+
+            <div class="buttons-slide">
+                <ion-button (click)="backSlide()" expand="block" fill="solid" shape="round">
+                    Anterior
+                </ion-button>
+                <ion-button (click)="next()" expand="block" fill="solid" shape="round">
+                    Siguiente
+                </ion-button>
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <h3>¿Para cuando lo necesitas?</h3>
+
+            <small class="ion-padding-horizontal">Colocá un número de semanas, ya que viene directamente desde el campo colombiano y nos das tiempo de hacer la logistica.</small>
+
+            <form #formWeeks="ngForm" class="food-time ion-margin-top">
+                <ion-item lines="none">
+                    <ion-label position="stacked">Semanas</ion-label>
+                    <ion-input name="weeks" ngModel placeholder="Cantidad" required></ion-input>
+                </ion-item>
+            </form>
+
+            <div class="buttons-slide">
+                <ion-button (click)="backSlide()" expand="block" fill="solid" shape="round">
+                    Anterior
+                </ion-button>
+                <ion-button (click)="next()" expand="block" fill="solid" shape="round">
+                    Terminar registro
+                </ion-button>
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <h3 class="slide-title ion-padding-horizontal">
+                Hemos creado tu pédido. Pronto conoceras a los proveedores de tus productos.
+            </h3>
+
+            <ion-button routerLink="/protected/buyer/home-buyer" expand="block" fill="solid" shape="round">
+                Ir al home
+            </ion-button>
+        </ion-slide>
+    </ion-slides>
+
+</ion-content>

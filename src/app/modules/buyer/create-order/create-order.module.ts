@@ -4,14 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomeBuyerPage } from './home-buyer.page';
+import { CreateOrderPage } from './create-order.page';
 import { Routes, RouterModule } from '@angular/router';
-import { CardOrderComponent } from './components/card-order/card-order.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeBuyerPage
+    component: CreateOrderPage
   }
 ];
 
@@ -22,9 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [
-    HomeBuyerPage,
-    CardOrderComponent
-  ]
+  declarations: [CreateOrderPage]
 })
-export class HomeBuyerPageModule {}
+export class CreateOrderPageModule {}

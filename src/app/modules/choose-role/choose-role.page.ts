@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TypeUserService } from '../../components/type-user.service';
+import { StorageService } from '../../components/storage.service';
 
 @Component({
   selector: 'app-choose-role',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChooseRolePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public readonly typeUserService: TypeUserService,
+    private readonly storageService: StorageService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  goTypeUser(id: string, url: string) {
+
+    this.storageService.typeUserId = id;
+    this.router.navigateByUrl(url);
+
   }
 
 }
