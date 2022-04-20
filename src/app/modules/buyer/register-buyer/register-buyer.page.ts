@@ -6,9 +6,9 @@ import { NotificationsService } from '../../../components/notifications.service'
 import { Buyer } from './buyer.interface';
 import { StorageService } from '../../../components/storage.service';
 import { BuyerService } from '../buyer.service';
-import { tap } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
 import { FoodService } from '../../../components/foods/food.service';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -57,20 +57,12 @@ export class RegisterBuyerPage implements OnInit {
           return;
         }
 
-        this.buyer.foods = this.foods;
-
         break;
 
     }
 
     this.slide.slideNext();
 
-  }
-
-  addFood( input: IonInput ) {
-    const food = `${input.value}`;
-    this.foods.push(food);
-    input.value = '';
   }
 
   async removeFood() {
@@ -83,6 +75,7 @@ export class RegisterBuyerPage implements OnInit {
 
   change(e: any) {
     const { value } = e.detail;
+    this.foods = [];
 
     for ( const v of value ) {
       this.buyer.foods.push(v._id);
@@ -93,16 +86,18 @@ export class RegisterBuyerPage implements OnInit {
 
   onSubmit( value: string ) {
 
-    this.buyer.hasTransport = value === 'yes' ? true : false;
+
+    this.buyer.hasTransport = (value === 'yes') ? true : false;
 
     const userId = this.storageService.userId;
-    const typeUserId = this.storageService.typeUserId;
 
     this.buyer.user = userId;
 
+    console.log(this.buyer);
+
     this.buyerService.create( this.buyer )
       .pipe(
-        tap( () => this.authService.assignTypeUser(userId, typeUserId) )
+        tap( ({buyer}) => this.authService.assignData(userId, buyer._id))
       )
       .subscribe(({message}) => {
         this.notificationService.notification( message, 'success' );

@@ -9,6 +9,7 @@ import { FarmerService } from '../farmer.service';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
+import { FoodService } from '../../../components/foods/food.service';
 
 @Component({
   selector: 'app-register-farmer',
@@ -19,7 +20,7 @@ export class RegisterFarmerPage implements OnInit {
 
   @ViewChild('slide') slide: IonSlides;
 
-  farmer: Farmer = {};
+  farmer: Farmer = {foods:[]};
   foods: Food[] = [];
 
   slidesOptions = {
@@ -34,6 +35,7 @@ export class RegisterFarmerPage implements OnInit {
     private readonly notificationService: NotificationsService,
     private readonly storageService: StorageService,
     private readonly farmerService: FarmerService,
+    public readonly foodService: FoodService,
     private readonly authService: AuthService,
     private router: Router
   ) { }
@@ -50,7 +52,7 @@ export class RegisterFarmerPage implements OnInit {
     switch (type) {
       case 'food':
 
-        if ( this.foods.length === 0 ) {
+        if ( this.farmer.foods.length === 0 ) {
           this.notificationService.notification('Debes agregar un alimento', 'warning');
           return;
         }
@@ -65,7 +67,7 @@ export class RegisterFarmerPage implements OnInit {
         }
 
         Object.keys(form.value).forEach( f => {
-          const food = this.foods.filter( fo => f === fo._id );
+          const food = this.farmer.foods.filter( fo => f === fo.name );
           food[0].dateHarvest = form.value[f];
         });
 
@@ -76,11 +78,10 @@ export class RegisterFarmerPage implements OnInit {
         const itemsSelecteds = Object.entries(form.value).filter( f => f[1] === true );
 
         itemsSelecteds.forEach( i => {
-          const food = this.foods.filter( fo => i[0] === fo._id);
+          const food = this.farmer.foods.filter( fo => i[0] === fo.name);
           food[0].onSale = i[1];
         });
 
-        this.farmer.foods = this.foods;
         this.farmer.user = this.storageService.userId;
 
         break;
@@ -90,9 +91,20 @@ export class RegisterFarmerPage implements OnInit {
 
   }
 
+  change(e: any) {
+    const { value } = e.detail;
+    this.foods = [];
+
+    for ( const v of value ) {
+      this.farmer.foods.push({id: v._id, name: v.name});
+      this.foods.push({name: v.name});
+    }
+
+  }
+
   addFood( input: IonInput ) {
     const food = `${input.value}`;
-    this.foods.push({_id: food, onSale: false});
+    this.foods.push({name: food, onSale: false});
 
     input.value = '';
   }
@@ -109,11 +121,11 @@ export class RegisterFarmerPage implements OnInit {
 
     this.farmer.hasTransport = value === 'yes' ? true : false;
     const userId = this.storageService.userId;
-    const typeUserId = this.storageService.typeUserId;
+    console.log(this.farmer);
 
     this.farmerService.create(this.farmer)
       .pipe(
-        tap( () => this.authService.assignTypeUser(userId, typeUserId))
+        tap( ({farmer}) => this.authService.assignData(userId, farmer._id))
       )
       .subscribe(({message}) => {
         this.notificationService.notification(message, 'success');

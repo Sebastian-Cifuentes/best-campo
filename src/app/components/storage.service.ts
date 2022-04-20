@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Local } from 'protractor/built/driverProviders';
 
 export enum LocalStorage {
   userId = 'userId',

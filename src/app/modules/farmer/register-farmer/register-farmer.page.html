@@ -10,19 +10,21 @@
         <ion-slide>
             <h3 class="slide-title">¿Que siembras o vendes?</h3>
             <ion-item>
-                <ion-label position="stacked">Ingresa un alimento</ion-label>
-                <!-- TODO: Realizar un select para escoger la comida. Debe venir desde la BD -->
-                <ion-input #inputFood placeholder="Alimento"></ion-input>
+                <ion-label>Escoge los alimento</ion-label>
+                <!-- <ion-input #inputFood placeholder="Alimento"></ion-input> -->
+                <ion-select (ionChange)="change($event)" multiple="true" cancelText="Cancelar" okText="Listo">
+                    <ion-select-option *ngFor="let food of foodService.foods" [value]="food">{{food.name}}</ion-select-option>
+                </ion-select>
             </ion-item>
 
-            <ion-button (click)="addFood(inputFood)" expand="block" fill="clear" shape="round">
+            <!-- <ion-button (click)="addFood(inputFood)" expand="block" fill="clear" shape="round">
                 Agregar alimento
-            </ion-button>
+            </ion-button> -->
 
             <div class="foods-added ion-margin-vertical">
-                <ion-badge *ngFor="let food of foods" class="ion-margin-bottom ion-margin-end" color="primary">
+                <ion-badge *ngFor="let food of farmer.foods" class="ion-margin-bottom ion-margin-end" color="primary">
                     <ion-icon (click)="removeFood()" name="close"></ion-icon>
-                    {{food.id}}
+                    {{food.name}}
                 </ion-badge>
             </div>
 
@@ -39,9 +41,9 @@
             <h3 class="slide-title">¿Cuentanos cuando da cosecha tu producto?</h3>
 
             <form #formTime="ngForm" class="food-time">
-                <ion-item *ngFor="let food of foods">
-                    <ion-label position="stacked">{{ food.id }}</ion-label>
-                    <ion-input [name]="food.id" ngModel placeholder="Tiempo de cosecha" required></ion-input>
+                <ion-item *ngFor="let food of farmer.foods">
+                    <ion-label position="stacked">{{ food.name }}</ion-label>
+                    <ion-input [name]="food.name" ngModel placeholder="Tiempo de cosecha" required></ion-input>
                 </ion-item>
             </form>
 
@@ -74,9 +76,9 @@
 
             <form #formHarvest="ngForm">
                 <ion-list *ngIf="radioHarvest.value === 'yes'">
-                    <ion-item lines="none" *ngFor="let food of foods">
-                        <ion-checkbox slot="start" [name]="food.id" ngModel="false"></ion-checkbox>
-                        <ion-label>{{food.id}}</ion-label>
+                    <ion-item lines="none" *ngFor="let food of farmer.foods">
+                        <ion-checkbox slot="start" [name]="food.name" ngModel="false"></ion-checkbox>
+                        <ion-label>{{food.name}}</ion-label>
                     </ion-item>
                 </ion-list>
             </form>

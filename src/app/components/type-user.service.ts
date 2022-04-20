@@ -7,6 +7,7 @@ interface TypeUser {
   name?: string;
   image?: string;
   url?: string;
+  urlHome?: string;
 }
 
 @Injectable({
@@ -27,6 +28,10 @@ export class TypeUserService {
   getAll() {
     this.http.get<{typeUsers: TypeUser[]}>( this.apiUrl )
       .subscribe(({typeUsers}) => this.typeUsers = typeUsers);
+  }
+
+  getById( id: string ) {
+    return this.http.get<{typeUser: TypeUser}>(`${this.apiUrl}/${id}`);
   }
 
 }

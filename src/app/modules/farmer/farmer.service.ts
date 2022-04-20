@@ -15,7 +15,7 @@ export class FarmerService {
   ) { }
 
   create( farmer: Farmer ) {
-    return this.http.post<{message: string}>(`${ this.apiUrl }/create`, farmer);
+    return this.http.post<{message: string; farmer: Farmer}>(`${ this.apiUrl }/create`, farmer);
   }
 
 }

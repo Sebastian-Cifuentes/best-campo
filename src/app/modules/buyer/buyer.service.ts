@@ -15,7 +15,7 @@ export class BuyerService {
   ) { }
 
   create( buyer: Buyer ) {
-    return this.http.post<{ message: string }>(`${ this.apiUrl }/create`, buyer);
+    return this.http.post<{ buyer: Buyer; message: string }>(`${ this.apiUrl }/create`, buyer);
   }
 
 }

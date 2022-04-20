@@ -1,4 +1,5 @@
 export interface Farmer {
+    _id?: string;
     hasHarvest?: boolean;
     hasTransport?: boolean;
     foods?: Food[];
@@ -7,7 +8,7 @@ export interface Farmer {
 
 
 export interface Food {
-    _id?: string;
+    id?: string;
     name?: string;
     dateHarvest?: string;
     onSale?: boolean | unknown;

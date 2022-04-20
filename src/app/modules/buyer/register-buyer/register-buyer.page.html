@@ -9,15 +9,10 @@
             <h3 class="slide-title">¿Que alimentos necesitas?</h3>
             <ion-item>
                 <ion-label>Escoge los alimentos</ion-label>
-                <!-- <ion-input #inputFood placeholder="Alimento"></ion-input> -->
-                <ion-select (ionChange)="change($event)" multiple="true" cancelText="Nah" okText="Okay!">
+                <ion-select (ionChange)="change($event)" multiple="true" cancelText="Cancelar" okText="Listo">
                     <ion-select-option *ngFor="let food of foodService.foods" [value]="food">{{food.name}}</ion-select-option>
                 </ion-select>
             </ion-item>
-
-            <!-- <ion-button (click)="addFood(inputFood)" expand="block" fill="clear" shape="round">
-                Agregar alimento
-            </ion-button> -->
 
             <div class="foods-added ion-margin-vertical">
                 <ion-badge *ngFor="let food of foods" class="ion-margin-bottom ion-margin-end" color="primary">

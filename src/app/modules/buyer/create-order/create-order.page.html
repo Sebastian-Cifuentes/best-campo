@@ -15,9 +15,9 @@
 
             <form #formNeed="ngForm">
                 <ion-list>
-                    <ion-item lines="none" *ngFor="let food of [ 'Papa', 'Arracacha', 'Yuca', 'Platano', 'Arroz' ]">
-                        <ion-checkbox slot="start" [name]="food" ngModel="false"></ion-checkbox>
-                        <ion-label>{{food}}</ion-label>
+                    <ion-item lines="none" *ngFor="let food of foodService.foods">
+                        <ion-checkbox slot="start" [name]="food.name" ngModel="false"></ion-checkbox>
+                        <ion-label>{{food.name}}</ion-label>
                     </ion-item>
                 </ion-list>
             </form>

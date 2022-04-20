@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { IonSlides } from '@ionic/angular';
+import { FoodService } from '../../../components/foods/food.service';
+import { Food } from '../../farmer/farmer.interface';
 
 @Component({
   selector: 'app-create-order',
@@ -11,6 +13,8 @@ export class CreateOrderPage implements OnInit {
 
   @ViewChild('slide') slide: IonSlides;
 
+  foodSelected: Food[] = [];
+
   slidesOptions = {
     initialSlide: 0,
     speed: 300,
@@ -20,25 +24,23 @@ export class CreateOrderPage implements OnInit {
   };
 
   constructor(
-    private _location: Location
+    public readonly foodService: FoodService,
+    private location: Location
   ) { }
 
   ngOnInit() {
   }
 
   back() {
-    this._location.back();
+    this.location.back();
   }
 
   backSlide() {
     this.slide.slidePrev();
   }
 
-    
   next() {
-
     this.slide.slideNext();
-
   }
 
 }

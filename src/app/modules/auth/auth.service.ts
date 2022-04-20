@@ -15,7 +15,7 @@ export class AuthService {
   ) { }
 
   login( email: string, password: string ) {
-    return this.http.post<{token: string}>(`${this.url}/login`, {email, password});
+    return this.http.post<{token: string; user: User}>(`${this.url}/login`, {email, password});
   }
 
   register( user: User ) {
@@ -27,8 +27,17 @@ export class AuthService {
     const params = new HttpParams()
       .set('typeUserId', typeUserId);
 
-    return this.http.patch(`${ this.url }/${ userId }`, {params});
+    this.http.patch(`${ this.url }/assign-type-user/${ userId }`, {}, {params})
+      .subscribe();
   }
 
+  assignData( userId: string, dataId: string ) {
+
+    const params = new HttpParams()
+      .set('dataId', dataId);
+
+    this.http.patch(`${ this.url }/assign-data/${ userId }`, {}, {params})
+      .subscribe();
+  }
 
 }
